@@ -1,12 +1,15 @@
-@login @Regression @Sanity
-  Feature: login
+@myProfile @Regression @Sanity
+Feature: login
 
-Scenario Outline: as a user i want to login to ndosi website
+  Scenario Outline: as a user i want to login to ndosi website
     Given i am on the login page
     And i enter my email <email>
     And i enter my password <password>
     When i click on the login button
     Then i should be logged in successfully
+    And i click on the menu buttong
+    And i click on the my profile button
+    Then i should see my profile page
     Examples:
       | email                | password     |
       | ndabemazii@gmail.com | Mazii@053103 |

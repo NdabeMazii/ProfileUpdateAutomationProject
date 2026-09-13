@@ -33,4 +33,19 @@ public class StepsDef extends Base{
         dashboardPage.verifyDashboardPageIsDisplayed();
     }
 
+    @And("i click on the menu button")
+    public void i_click_on_the_menu_button() {
+        dashboardPage.clickMenuButton();
+    }
+
+    @And("i click on the my profile button")
+    public void i_click_on_the_my_profile_button() {
+        dashboardPage.clickMyProfileButton();
+    }
+
+    @Then("i should see my profile page")
+    public void i_should_see_my_profile_page() {
+        profilePage.verifyProfilePageIsDisplayed();
+    }
+
 }
