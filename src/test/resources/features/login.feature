@@ -9,5 +9,5 @@ Scenario Outline: as a user i want to login to ndosi website
     Then i should be logged in successfully
     Examples:
       | email           | password  |
-      | admin@gmail.com | @12345679 |
+      | admin@gmail.com | @12345678 |
 
