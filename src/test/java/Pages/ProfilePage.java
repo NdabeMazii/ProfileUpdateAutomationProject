@@ -14,6 +14,12 @@ public class ProfilePage {
     @FindBy(xpath = "//h2[contains(text(),'\uD83D\uDC64 My Profile')]")
     WebElement profileHeading_xpath;
 
+    @FindBy(xpath = "//button[contains(text(),'✏\uFE0F Edit Profile')]")
+    WebElement editProfileButton_xpath;
+
+    @FindBy(xpath = "//label[@for='profilePicture']")
+    WebElement choosePhotoButton_xpath;
+
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
@@ -23,5 +29,14 @@ public class ProfilePage {
         profileHeading_xpath.click();
     }
 
+    public void clickEditProfileButton() {
+        new WebDriverWait(driver, java.time.Duration.ofSeconds(15)).until(visibilityOf(editProfileButton_xpath));
+        editProfileButton_xpath.click();
+    }
+
+    public void clickChoosePhotoButton() {
+        new WebDriverWait(driver, java.time.Duration.ofSeconds(15)).until(visibilityOf(choosePhotoButton_xpath));
+        choosePhotoButton_xpath.click();
+    }
 
 }

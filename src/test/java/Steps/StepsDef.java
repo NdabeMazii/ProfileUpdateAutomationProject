@@ -48,4 +48,14 @@ public class StepsDef extends Base{
         profilePage.verifyProfilePageIsDisplayed();
     }
 
+    @And("i click on the edit profile button")
+    public void i_click_on_the_edit_profile_button() {
+        profilePage.clickEditProfileButton();
+    }
+
+    @And("i click on the choose photo button")
+    public void i_click_on_the_choose_photo_button() {
+        profilePage.clickChoosePhotoButton();
+    }
+
 }
