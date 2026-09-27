@@ -12,6 +12,8 @@ Feature: login
     Then i should see my profile page
     And i click on the edit profile button
     And i upload a new profile picture "profilePhoto.jpg"
+    And i click on the save changes button
+    Then i should see the profile update success alert
     Examples:
       | email                | password     |
       | ndabemazii@gmail.com | Mazii@053103 |

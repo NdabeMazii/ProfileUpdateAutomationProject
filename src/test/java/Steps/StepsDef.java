@@ -58,4 +58,14 @@ public class StepsDef extends Base{
         profilePage.uploadNewProfilePicture(fileName);
     }
 
+    @And("i click on the save changes button")
+    public void i_click_on_the_save_changes_button() {
+        profilePage.clickSaveChangesButton();
+    }
+
+    @Then("i should see the profile update success alert")
+    public void verify_the_profile_picture_is_updated() {
+        profilePage.verifyProfileUpdatedAlert();
+    }
+
 }
