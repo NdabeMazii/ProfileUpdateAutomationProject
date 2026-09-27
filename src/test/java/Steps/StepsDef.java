@@ -53,9 +53,9 @@ public class StepsDef extends Base{
         profilePage.clickEditProfileButton();
     }
 
-    @And("i click on the choose photo button")
-    public void i_click_on_the_choose_photo_button() {
-        profilePage.clickChoosePhotoButton();
+    @And("i upload a new profile picture {string}")
+    public void i_upload_a_new_profile_picture(String fileName) {
+        profilePage.uploadNewProfilePicture(fileName);
     }
 
 }

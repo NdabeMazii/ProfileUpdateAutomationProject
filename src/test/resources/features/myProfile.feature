@@ -11,7 +11,7 @@ Feature: login
     And i click on the my profile button
     Then i should see my profile page
     And i click on the edit profile button
-    And i click on the choose photo button
+    And i upload a new profile picture "profilePhoto.jpg"
     Examples:
       | email                | password     |
       | ndabemazii@gmail.com | Mazii@053103 |
