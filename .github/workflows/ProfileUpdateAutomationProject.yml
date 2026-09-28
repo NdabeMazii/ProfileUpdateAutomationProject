@@ -26,10 +26,11 @@ jobs:
         - name: Build and Run tests
           run: mvn clean test -Dheadless=true
 
-        - name: Attach Cucumber Reports
+        - name: Upload Allure results
           if: always()
           uses: actions/upload-artifact@v4
           with:
-            name: Extents-report
-            path: test-output/
+            name: allure-results
+            path: allure-results/
+            if-no-files-found: warn
 
