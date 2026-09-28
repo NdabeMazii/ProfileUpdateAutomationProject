@@ -17,4 +17,3 @@ Feature: login
     Examples:
       | email                | password     |
       | ndabemazii@gmail.com | Mazii@053103 |
-

@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"html:target/cucumber-report.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         monochrome = true,
-        publish = true
+        publish = false
 )
 public class runner extends AbstractTestNGCucumberTests {
 }
