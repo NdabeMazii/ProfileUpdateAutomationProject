@@ -24,6 +24,9 @@ jobs:
             cache: maven
 
         - name: Build and Run tests
+          env:
+            API_EMAIL: ${{ secrets.API_EMAIL }}
+            API_PASSWORD: ${{ secrets.API_PASSWORD }}
           run: mvn clean test -Dheadless=true
 
         - name: Upload Allure results
