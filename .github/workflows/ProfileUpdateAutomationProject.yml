@@ -3,6 +3,8 @@ on:
     push:
         branches:
         - main
+    schedule:
+        - cron: '0 0 * * *'
     workflow_dispatch:
 
 env:
@@ -36,4 +38,3 @@ jobs:
             name: allure-results
             path: allure-results/
             if-no-files-found: warn
-
