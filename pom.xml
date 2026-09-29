@@ -67,11 +67,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+        <!-- Source: https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.12.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-maven</artifactId>
-            <version>3.1.0</version>
+            <artifactId>allure-testng</artifactId>
+            <version>3.0.0</version>
             <scope>compile</scope>
         </dependency>
 
