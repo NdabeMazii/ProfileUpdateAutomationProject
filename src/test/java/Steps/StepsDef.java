@@ -1,11 +1,33 @@
 package Steps;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AttachmentOptions;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.ByteArrayInputStream;
 
 public class StepsDef extends Base{
+
+    @After
+    public void attachScreenshotToAllure(Scenario scenario) {
+        try {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.attachment(
+                    "Screenshot - " + scenario.getName(),
+                    "image/png",
+                    new ByteArrayInputStream(screenshot),
+                    AttachmentOptions.withFileExtension(".png"));
+        } finally {
+            driver.quit();
+        }
+    }
 
     @Given("i am on the login page")
     public void i_am_on_the_login_page() {

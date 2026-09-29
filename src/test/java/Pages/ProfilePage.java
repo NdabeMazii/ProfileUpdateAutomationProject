@@ -1,5 +1,7 @@
 package Pages;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.AttachmentOptions;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,15 +11,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import javax.imageio.ImageIO;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class ProfilePage {
 
     WebDriver driver;
+    private Rectangle browserWindowBounds;
 
     @FindBy(xpath = "//h2[contains(text(),'\uD83D\uDC64 My Profile')]")
     WebElement profileHeading_xpath;
@@ -68,22 +79,46 @@ public class ProfilePage {
 
     public void clickSaveChangesButton() {
         new WebDriverWait(driver, java.time.Duration.ofSeconds(15)).until(visibilityOf(saveChangesButton_xpath));
+        org.openqa.selenium.Point windowPosition = driver.manage().window().getPosition();
+        org.openqa.selenium.Dimension windowSize = driver.manage().window().getSize();
+        browserWindowBounds = new Rectangle(
+                windowPosition.getX(),
+                windowPosition.getY(),
+                windowSize.getWidth(),
+                windowSize.getHeight());
         saveChangesButton_xpath.click();
     }
 
     public void verifyProfileUpdatedAlert() {
-        // 1. Wait for the alert to appear
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        try {
+            attachAlertScreenshot();
+            Assert.assertEquals(alert.getText(), "Profile updated successfully!");
+        } finally {
+            alert.accept();
+        }
+    }
 
-        // 2. Extract the text from the popup
-        String alertText = alert.getText();
+    private void attachAlertScreenshot() {
+        if (browserWindowBounds == null) {
+            throw new IllegalStateException("Browser window bounds were not captured before the alert opened");
+        }
 
-        // 3. Verify the text matches what is on the screen
-        Assert.assertEquals(alertText, "Profile updated successfully!");
-
-        // 4. Click 'OK' to close the popup
-        alert.accept();
+        try {
+            BufferedImage screenshot = new Robot().createScreenCapture(browserWindowBounds);
+            ByteArrayOutputStream imageBytes = new ByteArrayOutputStream();
+            if (!ImageIO.write(screenshot, "png", imageBytes)) {
+                throw new IllegalStateException("No PNG writer is available for the alert screenshot");
+            }
+            Allure.attachment(
+                    "Profile update success alert",
+                    "image/png",
+                    new ByteArrayInputStream(imageBytes.toByteArray()),
+                    AttachmentOptions.withFileExtension(".png"));
+        } catch (AWTException | IOException e) {
+            throw new IllegalStateException("Unable to capture the profile update alert screenshot", e);
+        }
     }
 
 }
